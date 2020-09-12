@@ -6,9 +6,10 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import Header from './components/Header';
-import Home from './components/Home';
+import Header from './components/Header/Header';
+import Home from './components/Home/Home';
 import Book from './components/Book/Book';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 export const UserContext = createContext()
 
@@ -18,23 +19,23 @@ function App() {
   return (
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <p>Name: {loggedInUser.name}</p>
-    <Router>
-      <Header />
-      <Switch>
-        <Route exact path="/" >
-          <Home />
-        </Route>
-        <Route path="/home" >
-          <Home />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/book/:bedType">
-          <Book />
-        </Route>
-      </Switch>
-    </Router>
+      <Router>
+        <Header />
+        <Switch>
+          <Route exact path="/" >
+            <Home />
+          </Route>
+          <Route path="/home" >
+            <Home />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <PrivateRoute path="/book/:bedType">
+            <Book />
+          </PrivateRoute>
+        </Switch>
+      </Router>
     </UserContext.Provider>
   );
 }
